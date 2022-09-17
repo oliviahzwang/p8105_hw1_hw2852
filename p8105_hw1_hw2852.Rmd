@@ -76,6 +76,11 @@ mean(pull(.data = problem2_df, var = var_character))
 mean(pull(.data = problem2_df, var = var_factor))
 ```
 
+```{r}
+as.numeric(pull(.data = problem2_df, var = var_logic))
+as.numeric(pull(.data = problem2_df, var = var_character))
+as.numeric(pull(.data = problem2_df, var = var_factor))
+```
 
 
 
