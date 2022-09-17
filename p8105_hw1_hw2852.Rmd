@@ -41,4 +41,10 @@ library(tidyverse)
 ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point(na.rm = TRUE)
 ```
 
+We can now export the scatterplot generated above to the project directory using the `ggsave` function. 
+```{r}
+ggsave("penguins_flipper_vs_bill_scatterplot.pdf")
+```
+
+
 
