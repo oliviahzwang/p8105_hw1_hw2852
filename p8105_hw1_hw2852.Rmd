@@ -46,5 +46,19 @@ We can now export the scatterplot generated above to the project directory using
 ggsave("penguins_flipper_vs_bill_scatterplot.pdf")
 ```
 
+# Problem 2
+
+## Creating a Dataframe
+
+```{r}
+problem2_df = 
+  tibble(
+    var_numeric = rnorm(n = 10),  
+    var_logic = c(TRUE, TRUE, FALSE, TRUE), 
+    var_char = c("cat", "dog", "goat", "cow", "elephant", "sheep", "horse", "koala", "pig", "flamingo"), 
+    var_factor = factor(c("high", "medium", "low", "low", "high", "low", "medium", "high", "low", "medium"))
+    )
+```
+
 
 
