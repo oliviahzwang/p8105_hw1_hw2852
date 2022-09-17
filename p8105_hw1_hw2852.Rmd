@@ -35,8 +35,9 @@ Based on the summary of the `penguins` dataset, we can see that the mean flipper
 
 ## Scatterplotting Flipper Length vs. Bill Length
 
-Let us generate a scatterplot, plotting flipper length vs. bill length, both measured in mm, using `ggplot`.
+Let us generate a scatterplot, plotting flipper length vs. bill length, both measured in mm, using `ggplot`. In order to use the `ggplot` function, let us first load the `tidyverse` library.
 ```{r}
+library(tidyverse)
 ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point(na.rm = TRUE)
 ```
 
