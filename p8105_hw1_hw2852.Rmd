@@ -7,7 +7,7 @@ date: "2022-09-17"
 
 # Problem 1
 
-## Loading & Summarizing the `Penguins` Dataset
+## 1.1 Loading & Summarizing the `Penguins` Dataset
 First, let us load the `penguins` dataset.
 
 ```{r}
@@ -33,7 +33,7 @@ Dataset `penguins` has **344 rows** and **8 columns**. The 8 rows each represent
 
 Based on the summary of the `penguins` dataset, we can see that the mean flipper length is **200.9mm**.
 
-## Scatterplotting Flipper Length vs. Bill Length
+## 1.2 Scatterplotting Flipper Length vs. Bill Length
 
 Let us generate a scatterplot, plotting flipper length vs. bill length, both measured in mm, using `ggplot`. In order to use the `ggplot` function, let us first load the `tidyverse` library.
 ```{r}
@@ -48,26 +48,28 @@ ggsave("penguins_flipper_vs_bill_scatterplot.pdf")
 
 # Problem 2
 
-## Creating a Dataframe
+## 2.1 Creating a Dataframe
 
-First, let us create a dataframe comprised of:
+Let us create a dataframe comprised of:
 
 * A random sample of size 10 from a standard Normal distribution;
 * A logical vector indicating whether elements of the sample are greater than 0;
 * A character vector of length 10; and
-* A factor vector of legnth 10, with 3 different factor "levels".
+* A factor vector of length 10, with 3 different factor "levels".
 
 ```{r}
 problem2_df = 
   tibble(
     var_numeric = rnorm(n = 10, mean = 0, sd = 1),  
-    var_logic = c(var_numeric > 0), 
+    var_logic = var_numeric > 0, 
     var_character = c("cat", "dog", "goat", "cow", "elephant", "sheep", "horse", "koala", "pig", "flamingo"), 
     var_factor = factor(c("high", "medium", "low", "low", "high", "low", "medium", "high", "low", "medium"))
     )
 ```
 
-Next, let us try to take the mean of each variable in the `problem2` dataframe.
+## 2.2 Taking the Means of Variables in a Dataframe
+
+We can now take the mean of each variable created in the `problem2` dataframe.
 
 ```{r}
 mean(pull(.data = problem2_df, var = var_numeric))
@@ -75,12 +77,22 @@ mean(pull(.data = problem2_df, var = var_logic))
 mean(pull(.data = problem2_df, var = var_character))
 mean(pull(.data = problem2_df, var = var_factor))
 ```
+Using the code above, we are able to generate the means of the numeric and logic variables, but not those of the character or factor variables (output: NA). At the time the code above was run, the mean of the numeric variables was about 0.36 and that of the factor variables was 0.4. 
 
-```{r}
+## 2.3 Understanding How R Treats Different Variable Types
+
+Before delving into possible explanations of why some means were able to be generated while others were not, let us apply the `as.numeric` function to attempt to convert the logical, character and factor variables to numeric variables. 
+
+```{r, results = 'hide', warning = FALSE}
 as.numeric(pull(.data = problem2_df, var = var_logic))
 as.numeric(pull(.data = problem2_df, var = var_character))
 as.numeric(pull(.data = problem2_df, var = var_factor))
 ```
 
+Applying the `as.numeric` function converts the logical variable to a binary output of 0 and 1, and converts the factor variable to 1's, 2's and 3's, each representing a different level of the factor variable; however, the character variable was not able to be converted to a numeric variable (output: NA). These results can both explain the outputs generated when the means of each variable in the `problem2` dataframe were taken earlier in Section 2.2, as well as how different variables are treated and can be manipulated in R. 
+
+The binary output of 0 and 1 generated when the logical variable is converted to a numerical variable is consistent with the specific meaning that `TRUE` and `FALSE` have as reserved words in the R language,  denoting logical constants. While `TRUE` and `FALSE` in R do hold the same meaning as they do in the English language, they also hold the values of `TRUE` = 1 and `FALSE` = 0. As such, considering R will do its best to carry out any function that it is told to do so, the mean of the logical variable generated in Section 2.2 is simply the means of the 1's and 0's that correspond to `TRUE` and `FALSE`. This also explains why the logical variable can be successfully converted to a numeric variable upon applying the `as.numeric` function. 
+
+Recall in Section 2.2 that the mean of the factor variable was unable to be generated. This is because, unlike the `TRUE` and `FALSE` of the logic variable, `high`, `medium` and `low` are not specially reserved words in the R language that carry additional meaning, or hold specific values. As a result, the mean of the factor variable as a character variable cannot be generated. After applying the `as.numeric` function, the factor variable was successfully converted to a numeric variable, taking on values of 1, 2 or 3. This demonstrates that while common character variables cannot generate a mean nor be converted to numeric variables, factor variable that have distinct levels and inherent order are exceptions. In other words, *categorical ordinal* variables can be converted to numerical variable, while *categorical nominal* variables cannot. This is also consistent with the results generated when attempting to take the mean of the character variable, and converting the character variable to a numerical variable. In both cases, the output generated was NA, since the character variable is categorical nominal. 
 
 
