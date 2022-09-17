@@ -1,24 +1,43 @@
 ---
-title: "p8105_hw1_hw2852"
+title: "P8105 Data Science I - Homework 1"
+author: Olivia Wang (hw2852)
 output: github_document
 date: "2022-09-17"
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# Problem 1
+
+## Loading & Summarizing the `Penguins` Dataset
+First, let us load the `penguins` dataset.
+
+```{r}
+data("penguins", package = "palmerpenguins")
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+Next, let us generate a summary of the `penguins` dataset, as well as determine the number of rows and columns in the dataset. 
+```{r}
+summary(penguins)
+nrow(penguins)
+ncol(penguins)
 ```
+Dataset `penguins` has **344 rows** and **8 columns**. The 8 rows each represent the following variables:
 
-## Including Plots
+1. Species: Adelie, Chinstrap, Gentoo
+1. Island: Biscoe, Dream, Torgersen
+1. Bill length in mm: 32.10 to 59.60
+1. Bill depth in mm: 13.10 to 21.50
+1. Flipper length in mm: 172.0 to 231.0
+1. Body mass in g: 2700 to 6300
+1. Sex: Female, Male
+1. Year: 2007, 2008, 2009
+
+Based on the summary of the `penguins` dataset, we can see that the mean flipper length is **200.9mm**.
+
+## Scatterplotting Flipper Length vs. Bill Length
+
+
+
+# Including Plots
 
 You can also embed plots, for example:
 
