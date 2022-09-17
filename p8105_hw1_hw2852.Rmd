@@ -50,15 +50,32 @@ ggsave("penguins_flipper_vs_bill_scatterplot.pdf")
 
 ## Creating a Dataframe
 
+First, let us create a dataframe comprised of:
+
+* A random sample of size 10 from a standard Normal distribution;
+* A logical vector indicating whether elements of the sample are greater than 0;
+* A character vector of length 10; and
+* A factor vector of legnth 10, with 3 different factor "levels".
+
 ```{r}
 problem2_df = 
   tibble(
-    var_numeric = rnorm(n = 10),  
-    var_logic = c(TRUE, TRUE, FALSE, TRUE), 
-    var_char = c("cat", "dog", "goat", "cow", "elephant", "sheep", "horse", "koala", "pig", "flamingo"), 
+    var_numeric = rnorm(n = 10, mean = 0, sd = 1),  
+    var_logic = c(var_numeric > 0), 
+    var_character = c("cat", "dog", "goat", "cow", "elephant", "sheep", "horse", "koala", "pig", "flamingo"), 
     var_factor = factor(c("high", "medium", "low", "low", "high", "low", "medium", "high", "low", "medium"))
     )
 ```
+
+Next, let us try to take the mean of each variable in the `problem2` dataframe.
+
+```{r}
+mean(pull(.data = problem2_df, var = var_numeric))
+mean(pull(.data = problem2_df, var = var_logic))
+mean(pull(.data = problem2_df, var = var_character))
+mean(pull(.data = problem2_df, var = var_factor))
+```
+
 
 
 
